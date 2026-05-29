@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Configurer vos outils Meta pour SnapGrowth</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --text: #1f1f1f;
+    --text-soft: #555;
+    --rule: #e5e5e3;
+    --accent: #1877F2;
+    --accent-soft: #eaf3ff;
+    --note-bg: #fff7e6;
+    --note-border: #ffd591;
+    --code-bg: #f0efed;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 48px 24px 96px;
+  }
+
+  header {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 24px;
+    margin-bottom: 40px;
+  }
+
+  .brand {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  h1 {
+    font-size: 32px;
+    line-height: 1.25;
+    margin: 0 0 8px;
+    font-weight: 700;
+  }
+
+  .subtitle {
+    color: var(--text-soft);
+    font-size: 16px;
+    font-style: italic;
+    margin: 0;
+  }
+
+  h2 {
+    font-size: 24px;
+    line-height: 1.3;
+    margin: 56px 0 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    font-weight: 700;
+    scroll-margin-top: 24px;
+  }
+
+  h2:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+
+  h3 {
+    font-size: 19px;
+    margin: 32px 0 12px;
+    font-weight: 700;
+    color: var(--text);
+    scroll-margin-top: 24px;
+  }
+
+  p { margin: 0 0 14px; }
+
+  ul, ol {
+    margin: 0 0 16px;
+    padding-left: 24px;
+  }
+
+  li { margin-bottom: 6px; }
+
+  a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+  }
+
+  a:hover { text-decoration-thickness: 2px; }
+
+  strong { font-weight: 700; }
+
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 14px;
+  }
+
+  /* Table of contents */
+  .toc {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 24px 0 40px;
+  }
+
+  .toc-title {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .toc ol {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .toc li {
+    margin-bottom: 4px;
+    font-size: 15px;
+  }
+
+  /* Aiguillage block */
+  .aiguillage {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    margin: 32px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .aiguillage p:last-child { margin-bottom: 0; }
+
+  /* Note block */
+  .note {
+    background: var(--note-bg);
+    border-left: 3px solid var(--note-border);
+    padding: 14px 20px;
+    margin: 20px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 15.5px;
+  }
+
+  .note p:last-child { margin-bottom: 0; }
+
+  /* Step block */
+  .step {
+    margin: 32px 0;
+  }
+
+  .step-number {
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  /* Checklist */
+  .checklist {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+
+  .checklist ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  .checklist li {
+    padding-left: 28px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  .checklist li::before {
+    content: "\2610";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--accent);
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  /* Back to top */
+  .back-to-top {
+    display: inline-block;
+    margin-top: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 13px;
+    color: var(--text-soft);
+    text-decoration: none;
+  }
+
+  .back-to-top:hover {
+    color: var(--accent);
+  }
+
+  /* Floating back to top button */
+  .float-top {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--text);
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 18px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s, transform 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    z-index: 10;
+  }
+
+  .float-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .float-top:hover {
+    background: var(--accent);
+  }
+
+  footer {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-size: 14px;
+    color: var(--text-soft);
+    text-align: center;
+  }
+
+  footer a { color: var(--text-soft); }
+
+  /* Mobile */
+  @media (max-width: 600px) {
+    body { font-size: 16px; }
+    .container { padding: 32px 18px 80px; }
+    h1 { font-size: 26px; }
+    h2 { font-size: 21px; margin-top: 40px; }
+    h3 { font-size: 18px; }
+    .float-top { bottom: 16px; right: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<a href="#top" class="float-top" id="floatTop" aria-label="Retour en haut">&uarr;</a>
+
+<div class="container" id="top">
+
+<header>
+  <div class="brand">SnapGrowth &middot; Guide</div>
+  <h1>Configurer vos outils Meta pour SnapGrowth</h1>
+  <p class="subtitle">Tout ce qu'il faut paramétrer avant de lancer votre première campagne.</p>
+</header>
+
+<p>Avant d'utiliser SnapGrowth, vous devez avoir paramétré vos outils Meta (Facebook, Instagram, Business Manager) de manière à pouvoir créer des publicités. Vous devrez disposer des éléments suivants, et vous assurer qu'ils soient accessibles :</p>
+
+<ul>
+  <li>Un compte Facebook</li>
+  <li>Une page Facebook (pas besoin qu'elle soit active ou visible)</li>
+  <li>Un compte Instagram pro (facultatif)</li>
+  <li>Le lien entre les deux</li>
+  <li>Un accès Meta Business Manager / Meta Business Suite</li>
+</ul>
+
+<div class="note">
+  <p>Ce parcours est donné à titre indicatif. L'interface de Meta évolue rapidement, et des vérifications supplémentaires d'email, de profil ou de numéro de téléphone peuvent être ajoutées au fur et à mesure du parcours.</p>
+</div>
+
+<div class="toc">
+  <div class="toc-title">Sommaire</div>
+  <ol>
+    <li><a href="#aiguillage">Par où commencer ?</a></li>
+    <li><a href="#disperses">Si vos comptes sont dispersés</a></li>
+    <li><a href="#parcours">Le parcours complet (étapes 1 à 10)</a></li>
+    <li><a href="#checklist">Avant de lancer votre première campagne</a></li>
+    <li><a href="#advertiser">Ajouter Sylvain comme advertiser SnapGrowth</a></li>
+    <li><a href="#prospects">Campagnes de collecte de contacts (Prospects)</a></li>
+    <li><a href="#contact">Une question ?</a></li>
+  </ol>
+</div>
+
+<h2 id="aiguillage">Par où commencer ?</h2>
+
+<div class="aiguillage">
+  <p><strong>Votre situation est simple</strong> (vous partez de zéro, ou vous avez juste un compte Instagram et/ou Facebook) : suivez directement <a href="#parcours">le parcours ci-dessous</a>, étape par étape.</p>
+  <p><strong>Vous avez déjà plusieurs comptes, pages ou Business Managers dispersés</strong> : lisez d'abord <a href="#disperses">&laquo; Si vos comptes sont dispersés &raquo;</a> avant de commencer le parcours.</p>
+  <p><strong>Vous souhaitez collecter des contacts</strong> (campagnes de type Prospects) : pensez à lire <a href="#prospects">&laquo; Campagnes de collecte de contacts &raquo;</a> en fin de document.</p>
+</div>
+
+<h2 id="disperses">Si vos comptes sont dispersés</h2>
+
+<p>Si vous utilisez Meta depuis longtemps, il est possible que vos comptes soient éparpillés : plusieurs Business Managers, une page rattachée à l'un, un compte publicitaire à l'autre, d'anciens comptes oubliés, etc. Avant de suivre le parcours principal, prenez quelques minutes pour faire le point sur votre situation. Posez-vous les questions suivantes, dans l'ordre.</p>
+
+<h3>1. Combien de Business Portfolios possédez-vous, et lesquels contrôlez-vous ?</h3>
+
+<p>Rendez-vous sur <a href="https://business.facebook.com/" target="_blank" rel="noopener">business.facebook.com</a> et regardez le sélecteur de portefeuilles en haut à gauche. Pour chacun, vérifiez si vous êtes administrateur (contrôle total) ou si vous avez un accès partiel. Notez ceux dont vous avez perdu l'accès administrateur : ceux-là ne pourront pas être récupérés sans passer par le support Meta.</p>
+
+<h3>2. Où se trouvent vos différents éléments (page Facebook, compte Instagram, compte publicitaire) ?</h3>
+
+<p>Pour chaque portefeuille que vous contrôlez, regardez dans &laquo; Settings &raquo; &rarr; &laquo; Accounts &raquo; quels éléments y sont rattachés. C'est à ce moment que vous repérerez les incohérences, par exemple une page rattachée à un Business Manager et un compte publicitaire à un autre.</p>
+
+<h3>3. Quel portefeuille garder comme référence ?</h3>
+
+<p>Choisissez le portefeuille qui contient déjà le plus d'éléments importants, ou celui sur lequel vous avez un contrôle administrateur propre. Idéalement, gardez celui qui contient votre page Facebook principale, car c'est l'identité publique de vos publicités.</p>
+
+<h3>4. Que faut-il déplacer ou reconnecter vers ce portefeuille de référence ?</h3>
+
+<p>Une fois votre portefeuille de référence choisi, identifiez les éléments dispersés ailleurs et rattachez-les à ce portefeuille en suivant les étapes du parcours principal. Le déplacement d'un compte publicitaire est l'opération la plus délicate (moyens de paiement, historique) : procédez avec prudence.</p>
+
+<div class="note">
+  <p>Si votre situation est complexe ou si vous avez perdu l'accès à certains comptes (Business Manager dont l'adresse email administrateur n'est plus accessible, page liée à un compte fermé, compte publicitaire avec un litige de paiement), ne forcez rien : contactez Sylvain à <a href="mailto:contact@snapgrowth.io">contact@snapgrowth.io</a> et nous regarderons votre situation ensemble.</p>
+</div>
+
+<a href="#top" class="back-to-top">&uarr; Retour en haut</a>
+
+<h2 id="parcours">Le parcours complet</h2>
+
+<div class="step">
+  <div class="step-number">Étape 1</div>
+  <h3 style="margin-top: 0">Vérifier que le compte Instagram est en pro (ou le passer en pro)</h3>
+  <p>Vous devez passer votre compte Instagram en compte pro. Si ce n'est pas le cas, rendez-vous dans &laquo; Profil &raquo; &rarr; &laquo; Menu &raquo; &rarr; &laquo; Settings &raquo; &rarr; &laquo; Business tools and controls &raquo; (ou &laquo; Account type and tools &raquo;) &rarr; &laquo; Switch to professional account &raquo;. Choisissez &laquo; Business &raquo;.</p>
+</div>
+
+<div class="step">
+  <div class="step-number">Étape 2</div>
+  <h3 style="margin-top: 0">Créer une page Facebook pour votre business</h3>
+  <p>Allez sur Facebook. Si vous n'avez pas de compte Facebook, créez-en un. Si vous disposez déjà d'un compte, identifiez-vous.</p>
+  <p>Dans le menu en haut à droite de l'écran (les neuf points), trouvez &laquo; Create &raquo; &rarr; &laquo; Page &raquo;. Créez votre page professionnelle à cet endroit. Il n'y a pas besoin de mettre de contenu sur cette page, elle ne sert qu'à opérer vos publicités et à lier le compte Instagram et le Business Manager Meta.</p>
+  <div class="note">
+    <p>Si votre compte Facebook est nouveau, Meta peut vous demander de patienter une heure avant de pouvoir créer la page. Nous vous recommandons également de publier un ou deux posts simples sur votre page Facebook pour montrer qu'elle est active : cela peut débloquer les vérifications de Meta.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-number">Étape 3</div>
+  <h3 style="margin-top: 0">Lier les comptes Facebook et Instagram</h3>
+  <p><strong>Depuis Instagram</strong> : ouvrez le menu, puis &laquo; Settings &raquo;. Dans la colonne de gauche, cliquez sur &laquo; Accounts center &raquo;.</p>
+  <p><strong>Depuis Facebook</strong> : cliquez sur votre photo de profil en haut à droite, puis sur &laquo; Settings and privacy &raquo;, puis &laquo; Settings &raquo;. Dans la colonne de gauche, cliquez sur &laquo; Accounts center &raquo;.</p>
+  <p>Une fois dans l'Account Center, dans la section &laquo; Profiles &raquo;, cliquez sur &laquo; Add accounts &raquo;. Vous pourrez choisir de lier un compte Facebook et vous y identifier. Cela liera les comptes Instagram et Facebook.</p>
+</div>
+
+<div class="step">
+  <div class="step-number">Étape 4</div>
+  <h3 style="margin-top: 0">Aller dans le Business Manager</h3>
+  <p>Depuis Facebook, cliquez sur l'icône représentant neuf points en haut à droite, puis dans la section &laquo; Professional &raquo;, cliquez sur &laquo; Ads manager &raquo;. Vous pouvez également aller directement sur <a href="https://business.facebook.com/" target="_blank" rel="noopener">business.facebook.com</a>. Identifiez-vous avec le compte Facebook que vous venez de créer.</p>
+</div>
+
+<div class="step">
+  <div class="step-number">Étape 5</div>
+  <h3 style="margin-top: 0">Créer un Business Portfolio</h3>
+  <p>Dans le Business Manager, cliquez sur &laquo; Create business portfolio &raquo; et remplissez les informations nécessaires : nom du compte, votre nom, votre adresse email. Il est possible que Meta vous demande d'attendre un peu si votre compte Facebook est trop récent.</p>
+</div>
+
+<div class="step">
+  <div class="step-number">Étape 6</div>
+  <h3 style="margin-top: 0">Créer un Ad Account</h3>
+  <p>Dans le Business Manager, dans la colonne de gauche, cliquez sur &laquo; Settings &raquo;. Dans la section &laquo; Accounts &raquo;, cliquez sur &laquo; Ad accounts &raquo;. Dans la fenêtre centrale, cliquez sur &laquo; Add &raquo;, puis sur &laquo; Create a new ad account &raquo;. Remplissez les formulaires :</p>
+  <ul>
+    <li>Nom du compte publicitaire, fuseau horaire, monnaie</li>
+    <li>Usage : &laquo; My business &raquo;</li>
+    <li>Confirmez les informations</li>
+  </ul>
+  <p>Meta vous proposera ensuite de renseigner un moyen de paiement. C'est celui qui sera utilisé pour payer vos campagnes. Vous pouvez l'ajouter maintenant, plus tard, ou en ajouter un autre ultérieurement.</p>
+  <div class="note">
+    <p><strong>Attention</strong> : une fois un moyen de paiement ajouté, les paramètres de pays, monnaie et fuseau horaire ne peuvent plus être modifiés. Cette étape est sensible et peut donner lieu à des vérifications complémentaires de la part de Meta, que nous vous encourageons à suivre.</p>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-number">Étape 7</div>
+  <h3 style="margin-top: 0">Rattacher une page Facebook</h3>
+  <p>Vous devez rattacher une page Facebook professionnelle depuis laquelle opérer vos publicités. Dans le menu de gauche, cliquez sur &laquo; Settings &raquo;, puis dans la section &laquo; Accounts &raquo;, cliquez sur &laquo; Pages &raquo;. Cliquez sur &laquo; Add &raquo; pour ajouter une page existante. Entrez l'adresse de votre page Facebook, puis validez les écrans suivants.</p>
+</div>
+
+<div class="step">
+  <div class="step-number">Étape 8</div>
+  <h3 style="margin-top: 0">Rattacher un profil Instagram</h3>
+  <p>Dans le Business Manager, menu de gauche &rarr; &laquo; Settings &raquo; &rarr; section &laquo; Accounts &raquo; &rarr; &laquo; Instagram accounts &raquo;. Cliquez sur &laquo; Add &raquo;, puis sur &laquo; Claim Instagram Account &raquo;. Comme mentionné précédemment, votre compte Instagram doit être un profil business. Suivez la procédure en vous identifiant à votre compte Instagram professionnel. Vous pouvez laisser la case &laquo; Manage @(votre profil Instagram) users by adding this profile to the People list? &raquo; décochée.</p>
+  <div class="note">
+    <p>Une fois ceci fait, les deux points suivants <strong>se ressemblent mais sont tous les deux indispensables</strong> :</p>
+    <ul style="margin-top: 10px">
+      <li>Menu de gauche &rarr; &laquo; Settings &raquo; &rarr; &laquo; Accounts &raquo; &rarr; &laquo; Instagram accounts &raquo;. Sélectionnez le compte Instagram, puis à droite cliquez sur &laquo; Connect assets &raquo;. Cela connectera le compte Instagram à l'Ad Account.</li>
+      <li>Menu de gauche &rarr; &laquo; Settings &raquo; &rarr; &laquo; Accounts &raquo; &rarr; &laquo; Pages &raquo;. Cliquez sur &laquo; Connect assets &raquo;, choisissez &laquo; Instagram account &raquo;, &laquo; Log in to Instagram &raquo;. Validez le parcours.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-number">Étape 9</div>
+  <h3 style="margin-top: 0">Vous assigner sur l'Ad Account</h3>
+  <p>Dans le Business Manager, colonne de gauche &rarr; &laquo; Settings &raquo; &rarr; section &laquo; Accounts &raquo; &rarr; &laquo; Ad accounts &raquo;. Choisissez votre Ad Account en cliquant dessus. Une fois ouvert, cliquez sur &laquo; Assign people &raquo;. Dans la colonne de gauche, cochez la case à côté de votre profil, puis donnez-vous &laquo; Full control &raquo;. Validez.</p>
+</div>
+
+<div class="step">
+  <div class="step-number">Étape 10</div>
+  <h3 style="margin-top: 0">Ajouter un numéro de téléphone vérifié</h3>
+  <p>Dans le Business Manager, colonne de gauche, cliquez sur le logo Meta tout en haut. Sur la page suivante, toujours dans la colonne de gauche, cliquez sur &laquo; Account Overview &raquo;. Dans la colonne centrale, trouvez la section &laquo; Verify phone number &raquo;. Vous devrez ajouter un numéro de téléphone et le faire valider par Meta.</p>
+</div>
+
+<a href="#top" class="back-to-top">&uarr; Retour en haut</a>
+
+<h2 id="checklist">Avant de lancer votre première campagne</h2>
+
+<p>Vérifiez que vous avez bien :</p>
+
+<div class="checklist">
+  <ul>
+    <li>Vos pages créées et liées</li>
+    <li>Un numéro de téléphone vérifié</li>
+    <li>Une adresse email vérifiée</li>
+    <li>Un moyen de paiement actif et validé</li>
+  </ul>
+</div>
+
+<p>Ces conditions sont indispensables au bon fonctionnement de votre compte publicitaire, et peuvent être bloquantes si elles ne sont pas remplies.</p>
+
+<a href="#top" class="back-to-top">&uarr; Retour en haut</a>
+
+<h2 id="advertiser">Ajouter Sylvain comme advertiser SnapGrowth</h2>
+
+<p>Pour que SnapGrowth puisse opérer vos campagnes, vous devez inviter Sylvain sur votre Business Manager avec un rôle d'&laquo; Advertiser &raquo; sur votre Ad Account.</p>
+
+<p>Dans le Business Manager, dans la colonne de gauche, cliquez sur &laquo; Settings &raquo;. Dans la section &laquo; Users &raquo;, cliquez sur &laquo; People &raquo;, puis en haut à droite sur &laquo; Invite People &raquo;. Un nouvel écran s'ouvre.</p>
+
+<ul>
+  <li><strong>Enter email</strong> : entrez <code>[adresse à compléter]</code></li>
+  <li><strong>Give access</strong> : laissez sur &laquo; Partial access &raquo;. Ne donnez pas &laquo; Full control &raquo;.</li>
+  <li><strong>Assign assets</strong> : choisissez votre Ad Account dans la liste. Dans les permissions qui s'ouvrent, section &laquo; Partial access &raquo;, cochez &laquo; Manage campaigns (ads) &raquo;. Les permissions &laquo; Create ads &raquo; et &laquo; View performance &raquo; seront données automatiquement.</li>
+  <li><strong>Review</strong> : vérifiez les informations et validez.</li>
+</ul>
+
+<p>Sylvain recevra un email d'invitation et l'acceptera de son côté. Vous pouvez suivre l'état dans &laquo; Settings &raquo; &rarr; &laquo; Users &raquo; &rarr; &laquo; People &raquo;.</p>
+
+<p>Une fois l'invitation acceptée, l'accès est actif et SnapGrowth peut commencer à opérer vos campagnes sur votre compte publicitaire.</p>
+
+<a href="#top" class="back-to-top">&uarr; Retour en haut</a>
+
+<h2 id="prospects">Campagnes de collecte de contacts (Prospects)</h2>
+
+<p>Si vous souhaitez faire des campagnes de collecte de contacts, vous devrez au préalable lire et accepter les conditions d'utilisation de Meta pour ce type de collecte. Rendez-vous sur <a href="https://www.facebook.com/legal/leadgen/tos/" target="_blank" rel="noopener">facebook.com/legal/leadgen/tos</a> et acceptez les conditions pour le compte publicitaire concerné.</p>
+
+<a href="#top" class="back-to-top">&uarr; Retour en haut</a>
+
+<h2 id="contact">Une question ?</h2>
+
+<p>Pour toute question ou si vous êtes bloqué, contactez Sylvain à <a href="mailto:contact@snapgrowth.io">contact@snapgrowth.io</a>.</p>
+
+<footer>
+  <p>SnapGrowth &middot; <a href="mailto:contact@snapgrowth.io">contact@snapgrowth.io</a></p>
+</footer>
+
+</div>
+
+<script>
+  // Show "back to top" floating button only after scrolling
+  const floatBtn = document.getElementById('floatTop');
+  let ticking = false;
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        if (window.scrollY > 600) {
+          floatBtn.classList.add('visible');
+        } else {
+          floatBtn.classList.remove('visible');
+        }
+        ticking = false;
+      });
+      ticking = true;
+    }
+  });
+</script>
+
+</body>
+</html>
